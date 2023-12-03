@@ -1,0 +1,60 @@
+    <%-include("./partials/head") %>
+
+    <body>
+
+        <%-include("./partials/admheader")%>
+            <main>
+
+                <div class="contenedor pad-y-2">
+                    <h1 class="text-grande">CREA TU CUENTA</h1>
+                    <P class="text-medio pad-y-2">Completa el formulario para ser parte del mundo de los Funkos.</P>
+                    <form action="/auth/register" method="post">
+                        <div class="contenedor-register pad-y-2 text-medio">
+                            <div class="pad-1 izquierda">
+                                <label>Nombre</b></label>
+                            </div>
+                            <div class="pad-1 derecha">
+                                <input class="input-log" type="text" name="name" placeholder="Nombre" required>
+                            </div>
+                            <div class="pad-1 izquierda">
+                                <label>Apellido</b></label>
+                            </div>
+                            <div class="pad-1 derecha">
+                                <input class="input-log" type="text" name="lastname" placeholder="Apellido" required>
+                            </div>
+                            <div class="pad-1 izquierda">
+                                <label>Email:</b></label>
+                            </div>
+                            <div class="pad-1 derecha">
+                                <input class="input-log" type="email" name="email" placeholder="example@mail.com"
+                                    required>
+                            </div>
+                            <div class="pad-1 izquierda">
+                                <label>Contraseña:</label>
+                            </div>
+                            <div class="pad-1 derecha">
+                                <input class="input-log" type="password" name="password" placeholder="*******************"
+                                    required>
+                            </div>
+                            <div class="pad-1 izquierda">
+                                <label>Repita Contraseña:</label>
+                            </div>
+                            <div class="pad-1 derecha">
+                                <input class="input-log" type="password" name="repassword" placeholder="*******************"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="">
+                            <button class="btn-rojo" type="submit">Registrar</button>
+                            <label class="text-recordarme"><input type="checkbox" name="recordarme" /> Acepto</label>
+                            <a href="#" class="sin-decoracion">Terminos y Condiciones</a>
+                        </div>
+                    </form>
+                </div>
+
+            </main>
+
+            <%-include("./partials/admfooter")%>
+    </body>
+
+</html>

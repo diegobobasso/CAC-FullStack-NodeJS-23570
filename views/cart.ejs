@@ -1,0 +1,91 @@
+    <%-include("./partials/head")%>
+
+    <body>
+
+
+        <%-include("./partials/header")%>
+
+
+            <main class="main-cart">
+                <div>
+                    <span class="text-titulo-cart">CARRITO DE COMPRAS</span>
+                </div>
+
+                <div class="separador"></div>
+                <div class="separador"></div>
+
+                <div class="contenedor-cart color-aliceblue text-bold">
+                    <span class="col-1">DETALLE DEL PRODUCTO</span>
+                    <span class="col-2 ancho-col-85">CANTIDAD</span>
+                    <span class="col-3">TOTAL</span>
+                    <span class="col-4 transparente"></span>
+                </div>
+
+                <div class="separador"></div>
+
+                <div class="contenedor-cart color-aliceblue">
+                    <div class="col-1 contenedor-producto">
+                        <img class="imagen-producto-cart col-2" src="/multimedia/star-wars/baby-yoda-1.webp" />
+                        <div class="col-2 text-left">
+                            <p class="text-medio">BABY YODA GROGU</p>
+                            <p class="text-bold">STAR WARS</p>
+                            <span class="text-bold">PRECIO $ </span><span>1799.99</span>
+                        </div>
+                    </div>
+                    <div class="col-2 ancho-col-85">
+                        <div class="cont-cantidad">
+                            <input class="input-cantidad" type="text" size="5" value="0" placeholder="0" />
+                            <div>
+                                <button class="btn-masmenos-chicos" type="button">
+                                    <img src="/multimedia/icons/signo-mas-chico.svg" />
+                                </button>
+                                <button class="btn-masmenos-chicos" type="button">
+                                    <img src="/multimedia/icons/signo-menos-chico.svg" />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 text-left"><span class="pad-left text-bold">$</span> <span
+                            class="pad-left">$$$$$.$$</span></div>
+                    <div class="col-4 icono"><a href="#"><img src="/multimedia/icons/cancelar.svg" /></a> </div>
+
+                </div>
+
+                <div class="separador"></div>
+                <div class="separador"></div>
+
+                <div class="contenedor-cart">
+                    <div class="col-4 text-right">
+                        <span class="text-titulo-cart">RESUMEN</span>
+                    </div>
+                </div>
+                <div class="contenedor-cart">
+                    <div class="col-4 color-aliceblue contenedor-cart pad text-bold">
+                        <span class="col-1 text-left pad">CANTIDAD DE ELEMENTOS</span>
+                        <span class="col-4 text-right pad">()</span>
+                        <span class="col-1 text-left pad">SUBTOTAL</span>
+                        <span class="col-4 text-right pad"><span>$ </span><span>$$$$$$$$</span></span>
+                        <span class="col-1 text-left pad">ENVIO</span>
+                        <span class="col-4 text-right pad"><span>$ </span><span>$$$$</span></span>
+                        <div class="linea-naranja"></div>
+                        <span class="col-1 text-left pad">TOTAL</span>
+                        <span class="col-4 text-right pad"><span>$ </span><span>$$$$$$$$</span></span>
+
+                    </div>
+                </div>
+                <div class="contenedor-cart">
+                    <div class="col-4">
+                        <button class="btn-pagar text-bold" type="button">IR A PAGAR</button>
+                    </div>
+                </div>
+
+            </main>
+
+
+
+
+            <%-include("./partials/footer")%>
+
+    </body>
+
+</html>
