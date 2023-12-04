@@ -73,12 +73,14 @@ const createView = (req, res) => {
 };
 
 const createItem = async (req, res) => {
+  console.log(req.body)
+  console.log(req.files)
   await modelo.postData(req);
 
   const articulos = await modelo.getAllData();
-  res.render("/admin", {
+  res.render("admin", {
     title: "Administración - FunkoShop",
-    articulos: articulos,
+    articulos: articulos
   });
 };
 

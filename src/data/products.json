@@ -154,5 +154,41 @@
     "product_sku": "HTP001001",
     "img_front": "multimedia/upload_img/snape-patronus-1.webp",
     "img_back": "multimedia/upload_img/snape-patronus-box.webp"
+  },
+  {
+    "product_id": 14,
+    "licence_name": "Harry Potter",
+    "category_name": "Figuras coleccionables",
+    "product_name": "Harry Potter & pidwid",
+    "product_description": "harry y pidwid",
+    "product_price": "1799.99",
+    "dues": "9",
+    "product_sku": " HPT001001",
+    "img_front": "multimedia/upload_img/3a7ac5097f53700ae22ab9f39afeb8da",
+    "img_back": "multimedia/upload_img/a7d29ac5c8f0908230098432c5cc342f"
+  },
+  {
+    "product_id": 15,
+    "licence_name": "Harry Potter",
+    "category_name": "Figuras coleccionables",
+    "product_name": "Harry Potter & pidwid",
+    "product_description": "jfdhDUFHLdjkghvk",
+    "product_price": "1",
+    "dues": "6",
+    "product_sku": " HPT001006",
+    "img_front": "multimedia/upload_img/1701676130182_harry-1.webp",
+    "img_back": "multimedia/upload_img/1701676130188_harry-box.webp"
+  },
+  {
+    "product_id": 16,
+    "licence_name": "Harry Potter",
+    "category_name": "Figuras coleccionables",
+    "product_name": "Harry Potter & pidwid",
+    "product_description": ".fkd-kfnd-kvn-",
+    "product_price": "1",
+    "dues": "3",
+    "product_sku": " HPT001007",
+    "img_front": "multimedia/upload_img/1701676294419_luna-1.webp",
+    "img_back": "multimedia/upload_img/1701676294423_luna-box.webp"
   }
 ]

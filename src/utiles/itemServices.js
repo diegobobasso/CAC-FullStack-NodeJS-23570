@@ -56,8 +56,8 @@ module.exports = {
         product_price: req.body.product_price,
         dues: req.body.dues,
         product_sku: req.body.product_sku,
-        img_front: req.body.files.length > 0 ? 'multimedia/upload_img/' + req.body.files[0] : null,
-        img_back: req.body.files.length > 1 ? 'multimedia/upload_img/' + req.body.files[1] : null
+        img_front: req.files.length > 0 ? 'multimedia/upload_img/' + req.files[0].filename : null,
+        img_back: req.files.length > 1 ? 'multimedia/upload_img/' + req.files[1].filename : null
       };
 
     data.push(newProduct);
