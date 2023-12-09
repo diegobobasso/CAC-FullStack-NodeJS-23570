@@ -1,15 +1,15 @@
-const express = require("express"); // Importamos express
+const express = require('express'); 
 const router = express.Router();    // Usamos Router de express
 
-// Definimos e importamos los controladores
+// Definimos rutas e importamos los controladores para cada ruta
 
-const {mainController} = require("../Controllers/mainController");
+const {mainController, contactController, aboutController, faqsController} = require('../Controllers/mainController');
 
-router.get("/", mainController);
-router.get("/contact", (req, res) => res.send("Estas en contacto."));
-router.get("/about", (req, res) => res.send("Estas en acerca de."));
-router.get("/faqs", (req, res) => res.send("Estas en preguntas y respuestas."));
+router.get('/', mainController);
+router.get('/contact', contactController);
+router.get('/about', aboutController);
+router.get('/faqs', faqsController);
 
 // Exportamos la ruta
-
+ 
 module.exports = router; 

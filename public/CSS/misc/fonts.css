@@ -122,3 +122,8 @@
 .text-error {
     margin-top: 10%;
 }
+
+.mensaje-error {
+    color:red;
+    font-size: .8rem;
+}

@@ -1,16 +1,24 @@
-const express = require("express"); // Importamos express
+const express = require('express');
 const router = express.Router();    // Usamos Router de express
 
-// Definimos e importamos los controladores
+// Definimos rutas e importamos los controladores para cada ruta
 
-const {shopView, shopFind, cartView, itemView} = require("../Controllers/shopController");
+const {
+    shopView, 
+    shopFind, 
+    cartView,
+    cartItemAdd, 
+    itemView
+} = require('../Controllers/shopController');
 
-router.get("/", shopView);
-router.post("/", shopFind);
-router.get("/item/:id", itemView);
-router.post("/item/:id/add", itemView);
-router.get("/cart", cartView);
-router.post("/cart", cartView);
+const { isLogin } = require('../utiles/authServices')
+
+router.get('/', isLogin, shopView);
+router.post('/', isLogin, shopFind);
+router.get('/item/:id', isLogin, itemView);
+router.post('/item/:id/add', isLogin, cartItemAdd);
+router.get('/cart', isLogin, cartView);
+router.post('/cart', isLogin, cartView);
 
 // Exportamos la ruta 
 

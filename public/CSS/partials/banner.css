@@ -1,6 +1,6 @@
 
 .banner {
-    background-image: url("../../multimedia/funkos-banner.webp");
+    background-image: url('../../multimedia/funkos-banner.webp');
     background-size: 110%;
     background-position: center;
     height: 388px;

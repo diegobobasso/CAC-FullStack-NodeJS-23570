@@ -1,21 +1,8 @@
-const express = require("express"); // Importamos express
+const express = require('express'); 
 const router = express.Router(); // Usamos Router de express
-const multer = require("multer");
-const path = require("path");
-/*
-const uploadFiles = multer({ 
-  destination: 'public/multimedia/upload_img/',
-  filename: `${Date.now}_${this.originalname}` 
-});  
-*/
+const uploadFiles = require('../utiles/uploadServices');
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, path.resolve(__dirname, '../../public/multimedia/upload_img')),
-  filename: (req, file, cb) => cb(null,Date.now() + '_' + file.originalname)
-  });
-  const uploadFiles = multer({storage});
-
-// Definimos e importamos los controladores
+// Definimos e importamos los controladores para cada ruta
 
 const {
   adminView,
@@ -26,16 +13,19 @@ const {
   editUpdate,
   deleteView,
   deleteItem,
-} = require("../Controllers/adminController");
+} = require('../Controllers/adminController');
 
-router.get("/", adminView);
-router.post("/", adminFind);
-router.get("/create", createView);
-router.post("/create", uploadFiles.array('files', 2), createItem);
-router.get("/edit/:id", editView);
-router.post("/edit/:id", editUpdate);
-router.get("/delete/:id", deleteView);
-router.post("/delete/:id", deleteItem);
+const { isAdmin } = require('../utiles/authServices');
+
+router.get('/', isAdmin, adminView);
+router.post('/', isAdmin, adminFind);
+router.get('/create', isAdmin, createView);
+router.post('/create', uploadFiles.array('files', 2), createItem);  // agregamos el middleware para 
+                                                                  // subir los archivos ( 2 maximo)
+router.get('/edit/:id', isAdmin,editView);
+router.post('/edit/:id', isAdmin, editUpdate);
+router.get('/delete/:id', isAdmin, deleteView);
+router.post('/delete/:id', isAdmin, deleteItem);
 
 // Exportamos la ruta
 

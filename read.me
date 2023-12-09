@@ -1,0 +1,47 @@
+PROBLEMAS A SOLUCIONAR:
+* Actualización de archivos de imágenes de los artículos.
+    - cómo realizar la actualización si no se quieren cambiar las imágenes?.
+    - cómo realizar la actualización si lo que se quiere es eliminar una imagen?, o sea solo se quiere 
+        borrar una imagen que se carga por error, y solo se tiene una imagen del producto.
+    - cómo evitar la generación basura, archivos de imágenes de productos que son eliminados o que se 
+        han actualizado sus fotos.
+
+FALTA IMPLEMENTAR  Y ALGUNOS PROBLEMAS:
+
+* Implementar los filtros en el shop, por nuevo, ofertas, favoritos, etc. 
+    - se debería actualizar la base de datos y agregar campos que permitieran filtrar los resultados.
+
+
+* En la funcionalidad de la página del carrito de compras:
+    - problema de la actualización del resumen cuando se agrega/quita una unidad de un producto desde la misma pagina.
+    - darle funcionalidad al boton para pagar la cuenta, no se como utilizar las APIs de compras electrónicas
+      como Mercado Pago, ualá, link pagos, etc.
+    - borrar un item ya agregado al carrito.
+    - corregir errores varios
+
+
+* En la pagina de editar item:
+    - Al actualizar un item, falta implementar la actualización de las imágenes, solo se actualiza la información, si
+      el administrador quiere mantener las imagenes tendríamos que poder detectar esa situación y no cambiar las resultados
+      a las imagenes ya cargadas con anterioridad. si lo implementamos ahora el administrador tiene que subir imagenes
+      aunque sean las mismas, sino hay conflicto.
+        a) si el administrador solo quiere cargar o renovar una de las imagenes.
+            - si solo sube una imagen, cual se actualiza?, la otra imagen queda o se tiene que borrar?
+        b) si el administrador no quiere modificar las imagenes ya cargadas.
+            - si no se suben imagenes, quedan las mismas si o si?
+        
+    - Se tendra que implementar alguna solución para prevenir que queden archivos residuales.
+
+* Que sea responsive, no se esta viendo bien en un celular.
+
+
+* si bien el profesor utiliza nodemon para ejecutar el programa, tuve problemas porque nodemon se reinicia cada vez 
+  que se guarda un archivo .js o .JSON, cerrando la sesión de usuario. usando node index.js no tuvimos ese inconveniente.
+
+
+Usuarios:
+Administrador: homero@gmail.com     password: 1234
+Ususario:      bart@gmail.com       password: 1234
+
+- se pueden registrar mas usuarios, si se quiere que sean administradores se tiene que modificar el JSON de users a mano,
+  solo un administrador con privilegios debería poder reistrar otro administrador.

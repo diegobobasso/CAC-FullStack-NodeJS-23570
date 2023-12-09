@@ -1,54 +1,65 @@
-const fs = require('fs');
+const fs = require('fs'); // requerimos fs
 
-const dataPath = './src/data/products.json';
+const dataPath = './data/products.json'; // definimos ruta al archivo de datos JSON
 
+// función de lectura de archivo JSON
 const readData = () => {
-  try {
-    return JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
-  } catch (error) {
+  try { // intentamos leer el archivo productos.json
+    return JSON.parse(fs.readFileSync(dataPath, 'utf-8')); // transformamos a formato JSON la 
+                                                          // leida con fs.readFileSync (lectura sincrónica)
+  } catch (error) { // si hay error lo mostramos y retornamos un array vacío
     console.error('Error al leer el archivo JSON:', error.message);
     return [];
   }
 };
 
-const writeData = (data) => {
-  try {
-    const jsonData = JSON.stringify(data, null, 2);
-    fs.writeFileSync(dataPath, jsonData, 'utf-8');
-    console.log('Archivo JSON actualizado correctamente.');
-  } catch (error) {
+// función de escritura de archivo JSON 
+const writeData = (data) => { // data: información a guardar en el archivo
+  try { // intentamos escribir el archivo productos.json
+    const jsonData = JSON.stringify(data, null, 2); // transformamos la información recibida
+    fs.writeFileSync(dataPath, jsonData, 'utf-8');  // escribimos la información en el archivo 
+    console.log('Archivo JSON actualizado correctamente.'); // si no hay error mostramos el mensaje 
+    return 1;  // devuelve 1 en exito    
+  } catch (error) {  // si hay error mostramos el mensaje 
     console.error('Error al escribir en el archivo JSON:', error.message);
+    return -1; // devuelve -1 en error
   }
 };
 
-module.exports = {
+module.exports = { // exportamos las funciones
 
-  getAllData: () => {
-    const data = readData();
-    return data;
+  // devuelve todos los productos
+  getAllData: () => { 
+    const data = readData(); // lee la info
+    return data;             // la retorna
   },
 
-  getDataById: (id) => {
-    const data = readData();
 
-    let index = {};
+  // devuelve un producto, lo busca por número de id
+  getDataById: (id) => {
+    const data = readData(); // lee la info
+
+    let item = {}; // creamos un objeto vacío 
     
-    data.forEach(item => {
-      if(item.product_id === parseInt(id)) {
-        index = item;
+    data.forEach(index => { // recorremos la info leída
+      if(index.product_id === parseInt(id)) { // si coincide el id
+        item = index;                        // lo guardamos en el objeto creado antes
       }
     });
-    console.log(index);
-    return index;
+    console.log(item);    // linea para depuración
+    return item;         // devolvemos el producto si se encontró, sino lo devuelve vacío
   
   },
   
-  postData: (req) => {
-    
-      const data = readData();
 
-      const newProduct = {
-        product_id: data.length + 1,        
+  // guarda un producto 
+  postData: (req) => { // recibe el require completo
+    
+      const data = readData(); // lee la info
+
+      // creamos un objeto y le agregamos parte de la información pasada por parametro
+      const newProduct = {    
+        product_id: data.length + 1,   // el id es = al total de elementos ( objetos en el array[]) + 1     
         licence_name: req.body.licence_name,
         category_name: req.body.category_name,
         product_name: req.body.product_name,
@@ -56,29 +67,33 @@ module.exports = {
         product_price: req.body.product_price,
         dues: req.body.dues,
         product_sku: req.body.product_sku,
-        img_front: req.files.length > 0 ? 'multimedia/upload_img/' + req.files[0].filename : null,
+        // se guardan las rutas a los archivos subidos al servidor (si hay, sino se guarda null)
+        img_front: req.files.length > 0 ? 'multimedia/upload_img/' + req.files[0].filename : null,  
         img_back: req.files.length > 1 ? 'multimedia/upload_img/' + req.files[1].filename : null
       };
 
-    data.push(newProduct);
-    writeData(data);
-    console.log( 'Datos agregados correctamente :   ', newProduct );
+    data.push(newProduct); // agregamos el nuevo producto 
+    const result = writeData(data);        // guarda la información
+    console.log( 'Datos agregados correctamente :   ', newProduct ); // muestra un mensaje y el producto agregado depurcion
+    return result;
   },
 
+  // actualiza un producto
   updateData: (req) => {
     
-    const data = readData();
-    const product_id = req.body.product_id;
-    let index = {};
+    const data = readData();  // lee toda la información de productos
+    const product_id = req.body.product_id; // guardamos el id del producto a actualizar
+    let item = {};    // objeto para guardar la info del producto a actualizar
     
-    data.forEach(item => {
-      if(item.product_id === parseInt(product_id)) {
-        index = item;
+    data.forEach(index => { // recorremos data en busca del producto a actualizar
+      if(index.product_id === parseInt(product_id)) { // si lo encontramos
+        item = index;   // guardamos la información en item
       }
     });
 
+    // creamos un objeto y guardamos la información 
     const updatedData = {
-      product_id: parseInt(req.body.product_id),        
+      product_id: parseInt(product_id),        
       licence_name: req.body.licence_name,
       category_name: req.body.category_name,
       product_name: req.body.product_name,
@@ -86,40 +101,39 @@ module.exports = {
       product_price: req.body.product_price,
       dues: req.body.dues,
       product_sku: req.body.product_sku,
-      img_front: index.img_front,
-      img_back: index.img_back
+
+      // se guardan las rutas anteriores, todavia no se actualizan las imagenes
+      img_front: item.img_front,
+      img_back: item.img_back
     };
 
     
     
-    if (index != {}) {
-      data[parseInt(index.product_id)-1] = updatedData;
-      writeData(data);
-      console.log('Datos actualizados correctamente' );
-      return 1;
+    if (item != {}) {
+      data[parseInt(item.product_id)-1] = updatedData; // actualizamos el producto
+      console.log('ID encontrado' );
+      return writeData(data);    // guardamos la información actualizada y devolvemos el resultado
     } else {
       console.log('ID no encontrado');
       return -1;
     }
   },
 
-  deleteData: (req) => {
-    const {id} = req.params;
-    const data = readData();
+  // borra un producto
+  deleteData: (id) => {
+    const data = readData(); // traemos la información de productos
 
-    let newData = [];
-    data.forEach(item => {
-      if(item.product_id !== parseInt(id)) {
-        item.product_id = newData.length + 1;
-        newData.push(item);
-        
+    let newData = []; // creamos un array vacio para guardar la información actualizada
+    data.forEach(item => { // recorremos en busca del id del producto
+      if(item.product_id !== parseInt(id)) {   // si el id de un producto no coincide con
+        item.product_id = newData.length + 1;  // con el producto que queremos eliminar, lo
+        newData.push(item);                    // agregamos al array con data actualizada
       }
     });
 
-    if (newData.length < data.length) {
-      writeData(newData);
-      console.log(`Datos eliminados correctamente`);
-      return 1;
+    if (newData.length < data.length) {   // si el tamaño de newData es menor a data filtramos correctamente la info
+      console.log('ID encontrado');
+      return writeData(newData);    // guardamos la información actualizada y devolvemos el resultado
     } else {
       console.log('ID no encontrado');
       return -1;

@@ -1,40 +1,52 @@
-const express = require("express");
-const cors = require("cors")
-const path = require("path");
+// requerimos dependencias y modulos externos
+const express = require('express');
+const cors = require('cors')
+const path = require('path');
+const session = require('express-session');
 
-const app = express();
+const app = express(); // guardamos express en app
 
-const port = 3000;
+const port = 3000; // definimos el puerto del servidor
 
-app.use(cors());
 
+// transferencia de información entre clientes y servidor
+app.use(cors());  
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json()); 
 
-// Rutas
+app.use(
+  session({
+    secret: 'las sesiones con un lío!', // Cambia esto a una cadena segura en un entorno de producción
+    resave: false,
+    saveUninitialized: true
+  })
+);
 
-const mainRoutes = require("./src/Routes/mainRoutes");
-const adminRoutes = require("./src/Routes/adminRoutes");
-const shopRoutes = require("./src/Routes/shopRoutes");
+// rutas
+
+const mainRoutes = require('./src/Routes/mainRoutes');
+const adminRoutes = require('./src/Routes/adminRoutes');
+const shopRoutes = require('./src/Routes/shopRoutes');
 const authRoutes = require('./src/Routes/authRoutes');
 
+// ruta para manejo de error 404 pagina no encontrada
 const { notFoundPage } = require('./src/error/errorHandlers');
 
-app.use(express.static(path.join(__dirname, "public")));
+// configuramos la carpeta de elementos estáticos
+app.use(express.static(path.join(__dirname, 'public')));
 
 // configuramos nuestro motor de vistas y su carpeta
-app.set ("views",path.join(__dirname,"views"));
-app.set ("view engine", "ejs");
+app.set ('views',path.join(__dirname,'views'));
+app.set ('view engine', 'ejs');
 
-// Definir las rutas
-
-app.use("/", mainRoutes);
-app.use("/admin", adminRoutes);
-app.use("/shop", shopRoutes);
+// definimos las rutas
+app.use('/', mainRoutes);
+app.use('/admin', adminRoutes);
+app.use('/shop', shopRoutes);
 app.use('/auth', authRoutes);
-
 app.use(notFoundPage);
 
+// ejecución del servidor
 app.listen(port, () => {
   console.log(`Servidor OK en el puerto ${port}`);
 });

@@ -1,106 +1,121 @@
-const modelo = require("../utiles/itemServices"); // Importamos el controlador del modelo
+const modelo = require('../utiles/itemServices'); // Importamos el controlador del modelo
 
+// carga la vista de administrador
 const adminView = async (req, res) => {
-  const articulos = await modelo.getAllData();
-  res.render("admin", {
-    title: "Administración - FunkoShop",
+  const articulos = await modelo.getAllData(); // carga todos los productos
+  res.render('admin', {         
+    title: 'Administración - FunkoShop',
     articulos: articulos,
   });
 };
 
-const adminFind = async (req, res) => {
-  let articulos = [];
-  let { clave } = req.body;
-  let claveRegex = new RegExp(clave, "i");
-  const todos = await modelo.getAllData();
 
-  console.log(req.body);
-  todos.forEach((articulo) => {
-    if (
-      claveRegex.test(articulo.licence_name) ||
-      claveRegex.test(articulo.product_name)
+// controlador de busqueda de administrador
+const adminFind = async (req, res) => {
+  let articulos = [];                         // array para guardar los resultados de articulos buscados
+  let { clave } = req.body;                   // extraemos la clave del body del request
+  let claveRegex = new RegExp(clave, 'i');    // creamos una expresión regular con la clave,
+                                              // bandera i para ignorar mayúsculas y minúsculas
+  const todos = await modelo.getAllData();    // carga todos los productos
+
+  console.log(req.body);                       // línea de depuración
+  todos.forEach((articulo) => {                 // recorremos todos los productos
+    if (  
+      claveRegex.test(articulo.licence_name) || // si coincide con la licencia o  el nombre
+      claveRegex.test(articulo.product_name)    // del producto 
     ) {
-      articulos.push(articulo);
+      articulos.push(articulo);                   // lo agregamos a articulos buscados
     }
   });
 
-  if (articulos.length == 0) {
-    articulos = todos;
-    res.render("admin", {
-      title: "Administración - FunkoShop",
-      articulos: articulos,
-    });
-  }
-  res.render("admin", {
-    title: "Administración - FunkoShop",
+  if (articulos.length == 0) {                  // si no hay resultados 
+    articulos = todos;                          // copiamos todos los productos
+  };
+  // cargamos la vista
+  res.render('admin', {
+    title: 'Administración - FunkoShop',
     articulos: articulos,
   });
 };
 
+// controlador de la vista de edit
 const editView = async (req, res) => {
-  let { id } = req.params;
-  console.log(id);
+  let { id } = req.params;                  // guardamos el id del item a buscar
+  console.log(id);                    // línea de depuración
 
   const item = await modelo.getDataById(id); // Busca un registro por Id
 
-  if (item == {}) {
-    const articulos = await modelo.getAllData();
-    res.render("admin", {
-      title: "Administracion - FunkoShop",
-      articulos: articulos,
-    });
-  }
-  res.render("edit", { title: `Edit Item #${id} - FunkoShop`, item: item });
+  res.render('edit', { title: `Edit Item #${id} - FunkoShop`, item: item });
+  
 };
 
+// conttrolador de actualización 
 const editUpdate = async (req, res) => {
-  console.log(req.params);
-  console.log(req.body);
+  console.log(req.params);             // línea de depuración
+  console.log(req.body);                // línea de depuración
 
-  const result = await modelo.updateData(req);
+  const result = await modelo.updateData(req);   // actualiza el JSON
 
-  if (result) {
-    const articulos = await modelo.getAllData();
-    res.render("admin", {
-      title: "Administracion - FunkoShop",
+  if (result) {                                     // si tuvo exito 
+    const articulos = await modelo.getAllData();    // carga los productos y 
+    res.render('admin', {                           // carga la vista de administrdor
+      title: 'Administracion - FunkoShop',
       articulos: articulos,
     });
-  }
+  } else {                                   // en caso de error
+      res.render('error', {title: 'Error', error:'Error: no se pudo acualizar el registro' });
+    }
 };
 
+// controlador de vista create
 const createView = (req, res) => {
-  res.render("create", { title: "Crear Item" });
+  res.render('create', { title: 'Crear Item' });
 };
 
+// controlador para agregar un producto
 const createItem = async (req, res) => {
-  console.log(req.body)
-  console.log(req.files)
-  await modelo.postData(req);
+  console.log(req.body);                         // línea de depuración
+  console.log(req.files);                        // línea de depuración
+const result = await modelo.postData(req);                   // agrega un producto
 
-  const articulos = await modelo.getAllData();
-  res.render("admin", {
-    title: "Administración - FunkoShop",
+if (result) {
+  const articulos = await modelo.getAllData();   // carga todos los productos   
+  res.render('admin', {                           // carga la vista de administrdor
+    title: 'Administración - FunkoShop',
     articulos: articulos
   });
+} else {                                   // en caso de error
+  res.render('error', {title: 'Error', error:'Error: no se pudo crear el registro' });
+}
 };
 
+
+// controlador de vista de confirmación de eliminación de un producto
 const deleteView = async (req, res) => {
-  const { id } = req.params;
-  const item = await modelo.getDataById(id);
-  res.render("delete", { title: `Delete Item #${id}`, item: item });
+  const { id } = req.params;                      // guarda el id para buscar el producto 
+  const item = await modelo.getDataById(id);      // busca el producto por id
+  res.render('delete', { title: `Delete Item #${id}`, item: item });  // carga la vista para confirmar
 };
 
+// controlador de eliminación de un producto
 const deleteItem = async (req, res) => {
-  modelo.deleteData(req);
-  const { id } = req.params;
-  console.log(id);
+  const { id } = req.body;                    // guarda el id del producto a eliminar
+  console.log(id); // linea de depuración 
+  
+  const result = await modelo.deleteData(id); // borra el registro
+  
+  if (result) {                                 // si no hay error
+    const articulos = await modelo.getAllData();  // busca todos los productos y 
+    res.render('admin', {                          // carga la vista de administrador
+      title: 'Administracion - FunkoShop',
+      articulos: articulos,
+    });
+  } else {                                   // en caso de error
+    res.render('error', {title: 'Error', error:'Error: no se pudo borrar el registro' });
+  }
+  };
 
-  const articulos = await modelo.getAllData();
-  res.render("admin", {
-    title: "Administracion - FunkoShop",
-    articulos: articulos,
-  });
-};
+// exportamos los controladores
 
 module.exports = {
   adminView,
