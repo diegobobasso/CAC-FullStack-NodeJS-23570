@@ -5,8 +5,7 @@
         <%-include('./partials/admheader') %>
 
             <main class='pad-y-2'>         
-                <!-- cuando solucionamos la actualizacion de archivos agregamos  enctype='multipart/form-data' al form-->
-                <form class='form-edit text-medio' action='/admin/edit/<%=item.product_id%>' method='post'>
+                <form class='form-edit text-medio' action='/admin/edit/<%=item.product_id%>' method='post' enctype="multipart/form-data">
                     <h1 class='text-grande'>EDITAR ITEM</h1>
                     <input id='product_id' name='product_id' value='<%=item.product_id%>' hidden />
                     <div class='pad-y-2'>
@@ -57,7 +56,7 @@
                     </div>
                     <div class='pad-buttom-1'>
                         <label>Imágenes: </label>
-                        <input type='file' name='files' multiple> <!-- falta solucionar actualización de archivos-->
+                        <input type='file' name='files' multiple> 
                     </div>
                     <div class='pad-buttom-1 contenedor-imagenes'>
                         <img class='imagen-edit izquierda' src='/<%=item.img_front%>' />

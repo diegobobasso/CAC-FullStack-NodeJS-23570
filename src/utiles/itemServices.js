@@ -102,9 +102,13 @@ module.exports = { // exportamos las funciones
       dues: req.body.dues,
       product_sku: req.body.product_sku,
 
-      // se guardan las rutas anteriores, todavia no se actualizan las imagenes
-      img_front: item.img_front,
-      img_back: item.img_back
+      // se guardan las rutas a los archivos subidos al servidor (si hay, sino se guarda null)
+      img_front: req.files.length > 0 ? 'multimedia/upload_img/' + req.files[0].filename : null,  
+      img_back: req.files.length > 1 ? 'multimedia/upload_img/' + req.files[1].filename : null
+     /* // se guardan las rutas a los nuevos archivvos, sino quedan los anteriores.
+      img_front: req.files.length > 0 ? 'multimedia/upload_img/' + req.files[0].filename : item.img_front,  
+      img_back: req.files.length > 1 ? 'multimedia/upload_img/' + req.files[1].filename : item.img_back
+      */
     };
 
     

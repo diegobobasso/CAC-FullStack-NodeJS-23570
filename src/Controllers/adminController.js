@@ -55,7 +55,7 @@ const editUpdate = async (req, res) => {
   console.log(req.body);                // línea de depuración
 
   const result = await modelo.updateData(req);   // actualiza el JSON
-
+ 
   if (result) {                                     // si tuvo exito 
     const articulos = await modelo.getAllData();    // carga los productos y 
     res.render('admin', {                           // carga la vista de administrdor

@@ -20,13 +20,13 @@ const { isAdmin } = require('../utiles/authServices');
 router.get('/', isAdmin, adminView);
 router.post('/', isAdmin, adminFind);
 router.get('/create', isAdmin, createView);
-router.post('/create', uploadFiles.array('files', 2), createItem);  // agregamos el middleware para 
+router.post('/create', isAdmin, uploadFiles.array('files', 2), createItem);  // agregamos el middleware para 
                                                                   // subir los archivos ( 2 maximo)
 router.get('/edit/:id', isAdmin,editView);
-router.post('/edit/:id', isAdmin, editUpdate);
+router.post('/edit/:id', isAdmin, uploadFiles.array('files', 2), editUpdate);
 router.get('/delete/:id', isAdmin, deleteView);
 router.post('/delete/:id', isAdmin, deleteItem);
-
+ 
 // Exportamos la ruta
 
 module.exports = router;
