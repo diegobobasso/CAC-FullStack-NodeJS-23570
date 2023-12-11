@@ -1,11 +1,14 @@
 const modelo = require('../utiles/itemServices'); // Importamos el controlador del modelo
-
 // controlador de vista raíz, index
 const mainController = async (req, res) => {
 
    const relacionados = await modelo.getAllData(); // busca articulos. hay que cambiar la base de datos para
                                                    // buscar los nuevos
-   res.render('index', {title: 'Home - FunkoShop', relacionados:relacionados, tituloSlider:'ULTIMOS LANZAMIENTOS'});
+   res.render('index', {
+      title: 'Home - FunkoShop', 
+      relacionados:relacionados, 
+      tituloSlider:'ULTIMOS LANZAMIENTOS'
+   });
 }
 
 const contactController = (req, res) => {

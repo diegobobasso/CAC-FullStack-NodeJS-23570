@@ -5,7 +5,10 @@ const itemServices = require('../utiles/itemServices');
 const shopView = async (req, res) => {
   const articulos = await modelo.getAllData(); // leemos todos los productos y los guardamos en una constante
   // pagina de la tienda con todos los productos
-  res.render('shop', { title: 'Shop - FunkoShop', articulos: articulos });
+  res.render('shop', { 
+    title: 'Shop - FunkoShop', 
+    articulos: articulos 
+  });
 };
 
 // controlador para filtrar las busquedas
@@ -119,7 +122,10 @@ const shopFind = async (req, res) => {
 
 
   // carga la vista con la información filtrada
-  res.render('shop', { title: 'Shop - FunkoShop', articulos: articulos }); 
+  res.render('shop', { 
+    title: 'Shop - FunkoShop', 
+    articulos: articulos 
+  }); 
 };
 
 // muestra una vista detallada de un artículo y los productos relacionados

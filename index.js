@@ -18,7 +18,11 @@ app.use(
   session({
     secret: 'las sesiones con un lío!', // Cambia esto a una cadena segura en un entorno de producción
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 5 * 60 * 1000, // 5 minutos
+    },
+    rolling: true, // La sesión se renovará en cada solicitud, extendiendo el tiempo de expiración
   })
 );
 

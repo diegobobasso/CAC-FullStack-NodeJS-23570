@@ -16,27 +16,53 @@
     grid-column: 2;
   }
   
-  nav ul {
-    list-style: none;
-  }
-  
-  nav ul li {
-    display: inline-flex;
-    font-family: Arial, sans-serif;
+  .menu {
+    background-color:  rgb(40, 40, 40);
     font-size: 1.2rem;
-    color: white;
   }
   
-  nav ul li a {
-    padding: 1rem;
-    color: #fff;
+  .menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    }
+  
+  .menu ul li {
+    display: inline-block;
+    width: 140px;
+  }
+  
+  .menu a {
+    display: block;
+    padding: 15px 20px;
     text-decoration: none;
+    color: whitesmoke;
   }
   
-  nav ul li a:hover {
-    background: transparent;
+  .menu a:hover {
+    font-weight: bold;
+  }
+
+  .submenu {
+    position: relative;
   }
   
+  .submenu ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color:  rgb(40, 40, 40);;
+  }
+  
+  .submenu:hover ul {
+    display: block;
+  }
+  
+  .submenu ul li {
+    display: block;
+  }
+
   .img-cart {
     width: 2rem;
     height: 2rem;

@@ -5,7 +5,7 @@ const adminView = async (req, res) => {
   const articulos = await modelo.getAllData(); // carga todos los productos
   res.render('admin', {         
     title: 'Administración - FunkoShop',
-    articulos: articulos,
+    articulos: articulos
   });
 };
 
@@ -34,7 +34,7 @@ const adminFind = async (req, res) => {
   // cargamos la vista
   res.render('admin', {
     title: 'Administración - FunkoShop',
-    articulos: articulos,
+    articulos: articulos
   });
 };
 
@@ -45,7 +45,10 @@ const editView = async (req, res) => {
 
   const item = await modelo.getDataById(id); // Busca un registro por Id
 
-  res.render('edit', { title: `Edit Item #${id} - FunkoShop`, item: item });
+  res.render('edit', { 
+    title: `Edit Item #${id} - FunkoShop`, 
+    item: item 
+  });
   
 };
 
@@ -60,16 +63,21 @@ const editUpdate = async (req, res) => {
     const articulos = await modelo.getAllData();    // carga los productos y 
     res.render('admin', {                           // carga la vista de administrdor
       title: 'Administracion - FunkoShop',
-      articulos: articulos,
+      articulos: articulos
     });
   } else {                                   // en caso de error
-      res.render('error', {title: 'Error', error:'Error: no se pudo acualizar el registro' });
+      res.render('error', {
+        title: 'Error', 
+        error:'Error: no se pudo acualizar el registro' 
+      });
     }
 };
 
 // controlador de vista create
 const createView = (req, res) => {
-  res.render('create', { title: 'Crear Item' });
+  res.render('create', { 
+    title: 'Crear Item' 
+  });
 };
 
 // controlador para agregar un producto
@@ -85,7 +93,10 @@ if (result) {
     articulos: articulos
   });
 } else {                                   // en caso de error
-  res.render('error', {title: 'Error', error:'Error: no se pudo crear el registro' });
+  res.render('error', {
+    title: 'Error', 
+    error:'Error: no se pudo crear el registro' 
+  });
 }
 };
 
@@ -94,7 +105,10 @@ if (result) {
 const deleteView = async (req, res) => {
   const { id } = req.params;                      // guarda el id para buscar el producto 
   const item = await modelo.getDataById(id);      // busca el producto por id
-  res.render('delete', { title: `Delete Item #${id}`, item: item });  // carga la vista para confirmar
+  res.render('delete', { 
+    title: `Delete Item #${id}`, 
+    item: item 
+  });  // carga la vista para confirmar
 };
 
 // controlador de eliminación de un producto
@@ -108,10 +122,13 @@ const deleteItem = async (req, res) => {
     const articulos = await modelo.getAllData();  // busca todos los productos y 
     res.render('admin', {                          // carga la vista de administrador
       title: 'Administracion - FunkoShop',
-      articulos: articulos,
+      articulos: articulos
     });
   } else {                                   // en caso de error
-    res.render('error', {title: 'Error', error:'Error: no se pudo borrar el registro' });
+    res.render('error', {
+      title: 'Error', 
+      error:'Error: no se pudo borrar el registro' 
+    });
   }
   };
 

@@ -79,6 +79,7 @@ const registerUser = async (req, res) => {
 
 // en un logout carga la vista raiz
 const logout = async (req, res) => {
+  console.log("sesión cerrada.   " , req.session)
   req.session.destroy();
   
   const relacionados = await modelo.getAllData(); // busca articulos. hay que cambiar la base de datos para
@@ -86,7 +87,7 @@ const logout = async (req, res) => {
   res.render('index', {
     title: 'Home - FunkoShop',
     relacionados: relacionados,
-    tituloSlider: 'ULTIMOS LANZAMIENTOS',
+    tituloSlider: 'ULTIMOS LANZAMIENTOS'
   });
 };
 
