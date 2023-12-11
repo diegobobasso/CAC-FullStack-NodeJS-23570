@@ -8,6 +8,7 @@ const {
     shopFind, 
     cartView,
     cartItemAdd, 
+    cartItemDel,
     itemView
 } = require('../Controllers/shopController');
 
@@ -18,6 +19,7 @@ router.post('/', isLogin, shopFind);
 router.get('/item/:id', isLogin, itemView);
 router.post('/item/:id/add', isLogin, cartItemAdd);
 router.get('/cart', isLogin, cartView);
+router.post('/cart/:producto/del', isLogin, cartItemDel);
 router.post('/cart', isLogin, cartView);
 
 // Exportamos la ruta 

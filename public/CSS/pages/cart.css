@@ -73,4 +73,10 @@
     gap:.3rem;
 }
 
+.icono-cancel {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  background-color: transparent;
+}
 

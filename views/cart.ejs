@@ -57,7 +57,10 @@
                                 value='<%= producto.item.product_price * producto.cantidad %>'>
                                     <%= producto.item.product_price * producto.cantidad %> </span>
                         </div>
-                        <div class='col-4 icono'><a href='#'><img src='/multimedia/icons/cancelar.svg' /></a> </div>
+                        <form class='col-4' action='/shop/cart/<%=producto.item.product_sku%>/del' method='post'>
+                            <input id='producto' name='producto' value=<%=producto.item.product_sku%> hidden/>
+                            <button class='icono-cancel' type='submit'><img src='/multimedia/icons/cancelar.svg' /></button> 
+                        </form>
     
                     </div>
                 <% index++ %>

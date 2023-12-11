@@ -202,14 +202,35 @@ const cartItemAdd = async (req, res) => {
     title: 'Carrito - FunkoShop',
     productos:productos
   });
+
 };
 
+const cartItemDel = async (req, res) => {
+  const {producto} = req.body;
+  const email = req.session.user;
 
+  console.log("producto =>   " , producto)
+
+  const result = await cartModel.deleteData(email, producto);
+
+  const cart = await cartModel.getDataByEmail(email);
+
+  const productos = cart.productos;
+
+  console.log(productos);
+
+  res.render('cart', { 
+    title: 'Carrito - FunkoShop',
+    productos:productos
+  });
+
+}
 
 module.exports = {
   shopView,
   shopFind,
   itemView,
   cartView,
-  cartItemAdd
+  cartItemAdd,
+  cartItemDel
 };

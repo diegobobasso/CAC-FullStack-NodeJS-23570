@@ -109,8 +109,35 @@ module.exports = { // exportamos las funciones
     }
   },
 
+  // borra un producto de un carrito
+  deleteData: (email, producto) => {
+    const data = readData(); // traemos la información de carritos
+    let result = 0;
+
+    data.forEach(index => { // recorremos en busca del email
+      if(index.email == email) {   // si encuentra el carrito
+        let newData = []; // creamos un array vacio para guardar la información actualizada
+        for(let i = 0; i < index.productos.length; i++) {
+          if(index.productos[i].item.product_sku !== producto) {   // si el codigo de un producto no coincide lo
+            newData.push(index.productos[i]);                    // agregamos al array con data actualizada
+          }
+        };
+        index.productos = newData; // guardamos la información actualizada
+        result = 1;
+      }
+    });
+
+    if (result == 1 ) {   // si pudo vaciar el carrito
+      console.log(`Carrito ${email} actualizado.`);
+      return writeData(data);    // guardamos la información actualizada y devolvemos el resultado
+    } else {
+      console.log('Carrito no encontrado');
+      return -1;
+    }
+  },
+
   // vacía un carrito
-  deleteData: (email) => {
+  emptyCart: (email) => {
     const data = readData(); // traemos la información de carritos
     let result = 0;
 
