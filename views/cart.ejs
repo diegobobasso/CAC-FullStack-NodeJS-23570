@@ -27,14 +27,15 @@
                 <% productos.forEach( producto => { %>
                     <% let idIndex = index %>
                     <div class='contenedor-cart color-aliceblue'>
-                        <input name='idIndex' value='<%=idIndex%>' hidden />
-                        <input name='item' value='<%=producto.item%>' hidden />
+                        <input id='idIndex<%=idIndex%>' name='idIndex' value='<%=idIndex%>' hidden />
+                        <input id='idSku<%=idIndex%>' name='idSku' value='<%=producto.item.product_sku%>' hidden />
+                        <input id='precioProducto<%=idIndex%>' name='precioProducto' value='<%=producto.item.product_price%>' hidden />
                         <div class='col-1 contenedor-producto'>
                             <img class='imagen-producto-cart col-2' src='/<%=producto.item.img_front%>' />
                             <div class='col-2 text-left'>
                                 <p class='text-medio'><%=producto.item.product_name%></p>
                                 <p class='text-bold'><%=producto.item.licence_name%></p>
-                                <span class='text-bold'>PRECIO $ </span><span id='precioProducto<%=idIndex%>' 
+                                <span class='text-bold'>PRECIO $ </span><span id='precio<%=idIndex%>' 
                                         value='<%=producto.item.product_price%>'><%=producto.item.product_price%></span>
                             </div>
                         </div>
@@ -53,7 +54,7 @@
                             </div>
                         </div>
                         <div class='col-3 text-left'><span class='pad-left text-bold'>$</span> <span
-                                id="subtotalProducto<%=idIndex%>" class='pad-left' 
+                                id="subtotalProducto<%=idIndex%>" class='pad-left'
                                 value='<%= producto.item.product_price * producto.cantidad %>'>
                                     <%= producto.item.product_price * producto.cantidad %> </span>
                         </div>
@@ -63,7 +64,9 @@
                         </form>
     
                     </div>
-                <% index++ %>
+                    
+                    <% index++ %>
+
                 <% })  %>
 
                 <input id='index' type='text' value='<%=index%>' hidden />

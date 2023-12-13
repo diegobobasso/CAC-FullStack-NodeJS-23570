@@ -11,3 +11,28 @@ resta.addEventListener('click', () => {
 });
 
 cantidad.addEventListener('change', () => cantidad.value = Number(cantidad.value) < 0 ? 0 : Number(cantidad.value));
+
+
+function agregarItem() {
+  // traemos el id del producto y la cantidad
+  const cantidad = document.querySelector('#cantidad');
+  const id = document.querySelector('#id');
+
+  let datos = {   // datos para enviar 
+    product_id: id.value,
+    cantidad: Number(cantidad.value)
+  };
+
+  // Realiza la solicitud POST usando fetch
+  fetch(`/shop/item/${id}/add`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json' // Indica que estás enviando datos en formato JSON
+    },
+    body: JSON.stringify(datos) // Convierte el objeto a JSON
+  })
+
+
+  
+}
+

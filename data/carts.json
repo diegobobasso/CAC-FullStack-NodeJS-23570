@@ -10,21 +10,6 @@
     "productos": [
       {
         "item": {
-          "product_id": 3,
-          "licence_name": "Star Wars",
-          "category_name": "Figuras coleccionables",
-          "product_name": "Storm Trooper Lightsaber",
-          "product_description": "Figura Funko coleccionable de  Storm Trooper de la saga Star Wars con Lightsaber",
-          "product_price": "1750",
-          "dues": "6",
-          "product_sku": "STW001003",
-          "img_front": "multimedia/upload_img/1702164472742_trooper-1.webp",
-          "img_back": "multimedia/upload_img/1702164472743_trooper-box.webp"
-        },
-        "cantidad": "1"
-      },
-      {
-        "item": {
           "product_id": 1,
           "licence_name": "Star Wars",
           "category_name": "Figuras coleccionables",
@@ -36,7 +21,22 @@
           "img_front": "multimedia/upload_img/1702163935821_baby-yoda-1.webp",
           "img_back": "multimedia/upload_img/1702163935824_baby-yoda-box.webp"
         },
-        "cantidad": "4"
+        "cantidad": "3"
+      },
+      {
+        "item": {
+          "product_id": 3,
+          "licence_name": "Star Wars",
+          "category_name": "Figuras coleccionables",
+          "product_name": "Storm Trooper Lightsaber",
+          "product_description": "Figura Funko coleccionable de  Storm Trooper de la saga Star Wars con Lightsaber",
+          "product_price": "1750",
+          "dues": "6",
+          "product_sku": "STW001003",
+          "img_front": "multimedia/upload_img/1702164472742_trooper-1.webp",
+          "img_back": "multimedia/upload_img/1702164472743_trooper-box.webp"
+        },
+        "cantidad": "2"
       }
     ]
   }

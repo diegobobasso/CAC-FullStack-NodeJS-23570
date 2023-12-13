@@ -69,18 +69,28 @@ module.exports = { // exportamos las funciones
     return result;
   },
 
-  addItem: (email, item) => {
+  // agrega un producto al carrito
+  addItem: (email, producto) => {
     const data = readData();
     let result = 0;
-    data.forEach(index => {
-      if(index.email == email) {
-          index.productos.push(item);
-          result = 1;   
-      }
+    
+    data.forEach(index => { // busca el carrito asociado al mail que inicia sesión
+      if(index.email == email) {   // si encuentra el carrito
+        for(let i = 0; i < index.productos.length; i++) {  // buscamos en los productos si ya esta cargado
+          if(index.productos[i].item.product_sku === producto.item.product_sku) {   // si el codigo de un producto coincide
+            index.productos[i].cantidad = Number(index.productos[i].cantidad) + Number(producto.cantidad)     // actualiza la cantidad
+            result = 1;
+          }
+        };
+        if(result == 0) {
+          index.productos.push(producto); // si no lo encontró antes, lo agrega
+          result = 1; 
+        }
+      } 
     });
         
     if (result == 1) {
-      console.log(`Item ${item} añadido en carrito ${email} .` );
+      console.log(`Item ${producto} añadido en carrito ${email} .` );
       return writeData(data);    // guardamos la información actualizada y devolvemos el resultado
       } else {
       console.log('Carrito no encontrado');
@@ -88,18 +98,44 @@ module.exports = { // exportamos las funciones
     }
   },
 
-  // actualiza un carrito
-  updateCart: (email, productos) => {
+ // actualiza un carrito (todos los productos)
+ updateCart: (email, productos) => {
+    
+  const data = readData();  // lee toda la información de carritos
+  let result = 0;
+  data.forEach(index => { // recorremos data en busca del carrito a actualizar
+    if(index.email.toString() == email.toString()) { // si lo encontramos
+       index.productos = productos;   // guardamos la información actualizada
+       result = 1;   
+    }
+  });
+  
+  if (result > 0) {
+    console.log(`Carrito ${email} actualizado` );
+    return writeData(data);    // guardamos la información actualizada y devolvemos el resultado
+  } else {
+    console.log('Carrito no encontrado');
+    return -1;
+  }
+},
+ 
+  // actualiza un carrito (solo cantidad de un producto)
+  updateCartItem: (email, product_sku, cantidad) => {
     
     const data = readData();  // lee toda la información de carritos
     let result = 0;
-    data.forEach(index => { // recorremos data en busca del carrito a actualizar
-      if(index.email.toString() == email.toString()) { // si lo encontramos
-         index.productos = productos;   // guardamos la información actualizada
-         result = 1;   
+    
+    data.forEach(index => { // recorremos en busca del email
+      if(index.email == email) {   // si encuentra el carrito
+        for(let i = 0; i < index.productos.length; i++) {
+          if(index.productos[i].item.product_sku === product_sku) {   // si el codigo de un producto no coincide lo
+            index.productos[i].cantidad = cantidad     // actualiza la cantidad
+          }
+        };
+        result = 1;
       }
     });
-    
+
     if (result > 0) {
       console.log(`Carrito ${email} actualizado` );
       return writeData(data);    // guardamos la información actualizada y devolvemos el resultado

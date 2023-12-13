@@ -1,8 +1,5 @@
 const modelo = require('./userServices');
 
-
-// const bcryptjs = require('bcryptjs');
-
 module.exports = {
 
     isLogin: (req, res, next) => {

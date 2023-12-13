@@ -176,49 +176,79 @@ const cartView = async (req, res) => {
     });
 };
 
-  // controlador del carrito, solo carga la vista
+  // controlador agrega productos al carrito
 const cartItemAdd = async (req, res) => {
   
-  const { id } = req.params;
-  const email = req.session.user;
-  const { cantidad } = req.body;
+  const { id } = req.params;        // id del producto
+  const email = req.session.user;   // mail del usuario
+  const { cantidad } = req.body;    // cantidad del producto a agregar
 
-  const item = await itemServices.getDataById(id);
 
-  const producto = {
+  console.log("id:   " + id);               // líneas de depuración 
+  console.log("cantidad:   " + cantidad) ;
+
+
+  const item = await itemServices.getDataById(id); // buscamos el producto
+  
+  const producto = {  // creamos el producto para guardar en el carrito
     item: item,
     cantidad: cantidad
   }
 
-  const result = await cartModel.addItem(email, producto);
+  const result = await cartModel.addItem(email, producto);  // agregamos el producto (result 
+                                                        // para control de errores en el futuro)
 
-  const cart = await cartModel.getDataByEmail(email);
+  const cart = await cartModel.getDataByEmail(email); // traemos los datos actualizados
 
-  const productos = cart.productos;
+  // separamos los productos
+  const productos = cart.productos; 
 
-  console.log(productos);
-
-  res.render('cart', { 
-    title: 'Carrito - FunkoShop',
-    productos:productos
-  });
+  // mostramos por pantalla para depuración solamente
+    console.log(productos);
 
 };
 
-const cartItemDel = async (req, res) => {
-  const {producto} = req.body;
-  const email = req.session.user;
+// actualiza la cantidad de un producto dentro del carrito
+const cartItemUpdate = async (req, res) => {
+  
+  const email = req.session.user;     // mail de usuario
+  const { product_sku } = req.body;   // código del producto
+  const { cantidad } = req.body;      // cantidad actualizada
+  
+  /****lineas de depuración  ***********/
+  console.log(req.body);                          
+  console.log("cantidad  :     " + cantidad)
+  console.log("SKU       :     " + product_sku)
+  /**********************************/
 
-  console.log("producto =>   " , producto)
+  const result = await cartModel.updateCartItem(email, product_sku, cantidad); // actualizamos el carrito
 
-  const result = await cartModel.deleteData(email, producto);
-
+  // traemos los datos actualizados
   const cart = await cartModel.getDataByEmail(email);
-
+  // separamos los productos
   const productos = cart.productos;
 
-  console.log(productos);
+  console.log(productos);    // línea de depuración  
 
+};
+
+
+// borra un producto del carrito
+const cartItemDel = async (req, res) => {
+  const {producto} = req.body; // producto a borrar
+  const email = req.session.user; // mail de usuario
+
+  console.log("producto =>   " , producto) // linea de depuración 
+
+  const result = await cartModel.deleteData(email, producto); // borra el producto
+
+  // traemos datos actualizados
+  const cart = await cartModel.getDataByEmail(email);
+  // separamos los productos
+  const productos = cart.productos;
+  // mostramos por pantalla
+  console.log(productos);
+  // renderizamos la vista del carrito
   res.render('cart', { 
     title: 'Carrito - FunkoShop',
     productos:productos
@@ -232,5 +262,6 @@ module.exports = {
   itemView,
   cartView,
   cartItemAdd,
-  cartItemDel
+  cartItemDel,
+  cartItemUpdate
 };

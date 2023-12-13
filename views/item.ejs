@@ -11,7 +11,7 @@
 
                 </div>
 
-                <form class='derecha formulario' action='/shop/item/<%=item.product_id%>/add' method="post">
+                <form class='derecha formulario' >
                     <input id='id' value='<%=item.product_id%>' hidden />
                     <p class='text-form-saga'>
                         <%=item.licence_name%>
@@ -37,7 +37,7 @@
                                 </button>
                             </div>
                         </div>
-                        <button class='btn-rojo' type='submit'>Agregar al carrito</button>
+                        <button class='btn-rojo' onclick='agregarItem()'>Agregar al carrito</button>
                     </div>
                     <a href='#'>ver metodos de pago</a>
                     <span>-</span>
