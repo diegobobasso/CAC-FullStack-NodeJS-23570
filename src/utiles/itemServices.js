@@ -26,6 +26,23 @@ const writeData = (data) => { // data: información a guardar en el archivo
   }
 };
 
+const cleanUploads = (file) => {
+  file = './public/' + file;
+  //if (fs.existsSync(file)) {
+    // Borrar el archivo
+    fs.unlink(file, (error) => {
+      if (error) {
+        console.error(`Error al borrar el archivo:  ${file} \n`, error);
+        return -1;
+      } else {
+        console.log('Archivo borrado exitosamente.');
+        return 1;
+      }
+    });
+  //}
+  // return -1;
+}
+
 module.exports = { // exportamos las funciones
 
   // devuelve todos los productos
@@ -105,17 +122,17 @@ module.exports = { // exportamos las funciones
       // se guardan las rutas a los archivos subidos al servidor (si hay, sino se guarda null)
       img_front: req.files.length > 0 ? 'multimedia/upload_img/' + req.files[0].filename : null,  
       img_back: req.files.length > 1 ? 'multimedia/upload_img/' + req.files[1].filename : null
-     /* // se guardan las rutas a los nuevos archivvos, sino quedan los anteriores.
-      img_front: req.files.length > 0 ? 'multimedia/upload_img/' + req.files[0].filename : item.img_front,  
-      img_back: req.files.length > 1 ? 'multimedia/upload_img/' + req.files[1].filename : item.img_back
-      */
-    };
-
-    
+    }; 
     
     if (item != {}) {
       data[parseInt(item.product_id)-1] = updatedData; // actualizamos el producto
       console.log('ID encontrado' );
+      if(item.img_front !== null ){
+        cleanUploads(item.img_front);
+      } 
+      if(item.img_back !== null ){
+        cleanUploads(item.img_back);
+      } 
       return writeData(data);    // guardamos la información actualizada y devolvemos el resultado
     } else {
       console.log('ID no encontrado');
@@ -126,17 +143,25 @@ module.exports = { // exportamos las funciones
   // borra un producto
   deleteData: (id) => {
     const data = readData(); // traemos la información de productos
-
+    let itemDel = {}; // objeto temporal para guardar el item a borrar
     let newData = []; // creamos un array vacio para guardar la información actualizada
     data.forEach(item => { // recorremos en busca del id del producto
       if(item.product_id !== parseInt(id)) {   // si el id de un producto no coincide con
         item.product_id = newData.length + 1;  // con el producto que queremos eliminar, lo
         newData.push(item);                    // agregamos al array con data actualizada
+      } else {
+        itemDel = item;
       }
     });
 
     if (newData.length < data.length) {   // si el tamaño de newData es menor a data filtramos correctamente la info
       console.log('ID encontrado');
+      if(itemDel.img_front !== null ){
+        cleanUploads('/'+itemDel.img_front);
+      } 
+      if(itemDel.img_back !== null ){
+        cleanUploads('/'+itemDel.img_back);
+      } 
       return writeData(newData);    // guardamos la información actualizada y devolvemos el resultado
     } else {
       console.log('ID no encontrado');
