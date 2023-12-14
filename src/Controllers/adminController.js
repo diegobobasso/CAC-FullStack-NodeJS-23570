@@ -5,7 +5,8 @@ const adminView = async (req, res) => {
   const articulos = await modelo.getAllData(); // carga todos los productos
   res.render('admin', {         
     title: 'Administración - FunkoShop',
-    articulos: articulos
+    articulos: articulos,
+    isLogged:true
   });
 };
 
@@ -34,7 +35,8 @@ const adminFind = async (req, res) => {
   // cargamos la vista
   res.render('admin', {
     title: 'Administración - FunkoShop',
-    articulos: articulos
+    articulos: articulos,
+    isLogged:true
   });
 };
 
@@ -47,7 +49,8 @@ const editView = async (req, res) => {
 
   res.render('edit', { 
     title: `Edit Item #${id} - FunkoShop`, 
-    item: item 
+    item: item,
+    isLogged:true 
   });
   
 };
@@ -63,7 +66,8 @@ const editUpdate = async (req, res) => {
     const articulos = await modelo.getAllData();    // carga los productos y 
     res.render('admin', {                           // carga la vista de administrdor
       title: 'Administracion - FunkoShop',
-      articulos: articulos
+      articulos: articulos,
+      isLogged:true
     });
   } else {                                   // en caso de error
       res.render('error', {
@@ -76,7 +80,8 @@ const editUpdate = async (req, res) => {
 // controlador de vista create
 const createView = (req, res) => {
   res.render('create', { 
-    title: 'Crear Item' 
+    title: 'Crear Item',
+    isLogged:true 
   });
 };
 
@@ -90,7 +95,8 @@ if (result) {
   const articulos = await modelo.getAllData();   // carga todos los productos   
   res.render('admin', {                           // carga la vista de administrdor
     title: 'Administración - FunkoShop',
-    articulos: articulos
+    articulos: articulos,
+    isLogged:true
   });
 } else {                                   // en caso de error
   res.render('error', {
@@ -107,7 +113,8 @@ const deleteView = async (req, res) => {
   const item = await modelo.getDataById(id);      // busca el producto por id
   res.render('delete', { 
     title: `Delete Item #${id}`, 
-    item: item 
+    item: item,
+    isLogged:true 
   });  // carga la vista para confirmar
 };
 
@@ -122,12 +129,13 @@ const deleteItem = async (req, res) => {
     const articulos = await modelo.getAllData();  // busca todos los productos y 
     res.render('admin', {                          // carga la vista de administrador
       title: 'Administracion - FunkoShop',
-      articulos: articulos
+      articulos: articulos,
+      isLogged:true
     });
   } else {                                   // en caso de error
     res.render('error', {
       title: 'Error', 
-      error:'Error: no se pudo borrar el registro' 
+      error:'Error: no se pudo borrar el registro'
     });
   }
   };

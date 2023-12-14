@@ -6,7 +6,7 @@ module.exports = {
         if(req.session.user) {
             next()
         } else {
-            res.render('login', { title: 'Login - FunkoShop', message: 'Necesita Iniciar sesión...' });
+            res.render('login', { title: 'Login - FunkoShop', message: 'Necesita Iniciar sesión...', isLogged:false });
         }
     },
 
@@ -17,11 +17,11 @@ module.exports = {
                 next();
             } else {
                 res.render('login', { title: 'Login - FunkoShop', 
-                message: 'Necesita permiso de administrador para esta sección.' });
+                message: 'Necesita permiso de administrador para esta sección.', isLogged:true });
         }
         } else {
             res.render('login', { title: 'Login - FunkoShop', 
-            message: 'Necesita Iniciar sesión de administrador' });
+            message: 'Necesita Iniciar sesión de administrador', isLogged:false });
         }
     }
     

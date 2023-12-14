@@ -6,22 +6,37 @@ const bcryptjs = require('bcryptjs');
 
 // carga la vista login
 const loginView = (req, res) => {
+
+  let isLogged = false;
+
+  if (req.session.user !== undefined) {
+     isLogged = true;
+  }
+
   res.render('login', { 
     title: 'Login - FunkoShop', 
-    message: " " 
+    message: " " ,
+    isLogged:isLogged
   });
 };
 
 // carga la vista login
 const loginUser = async (req, res) => {
-  
+
+  let isLogged = false;
+
+  if (req.session.user !== undefined) {
+     isLogged = true;
+  }
+ 
   const {email} = req.body;         // recuperamos email y password
   const {password} = req.body;
-  
+ 
   if (email === undefined) {  // si los datos son undefined vuelve
     return res.render('login', { 
       title: 'Login - FunkoShop', 
-      message: 'Ingrese usuario y/o password.' 
+      message: 'Ingrese usuario y/o password.',
+      isLogged:isLogged
     });  
   }
 
@@ -31,7 +46,7 @@ const loginUser = async (req, res) => {
   
     if (bcryptjs.compareSync(password, user.password)) {   // compara el password y si es verdarero
       console.log('Usuario validado correctamente!');  
-      req.session.user = email;             // guardamos el usuario
+      req.session.user = email;          // guardamos el usuario
       console.log(req.session);         // linea de depuración
       return res.redirect('/');         
     }
@@ -41,22 +56,37 @@ const loginUser = async (req, res) => {
   // si es falso
   res.render('login', { 
     title: 'Login - FunkoShop', 
-    message: 'Usuario y/o password incorrectos!' 
+    message: 'Usuario y/o password incorrectos!',
+    isLogged:isLogged 
   });
   
 }
 
 // carga la vista register
 const registerView = (req, res) => {
+
+  let isLogged = false;
+
+  if (req.session.user !== undefined) {
+     isLogged = true;
+  }
+
   res.render('register', { 
     title: 'Register - FunkoShop', 
-    message: ' ' 
+    message: ' ' ,
+    isLogged:isLogged
   });
 };
 
 // registra un nuevo usuario
 const registerUser = async (req, res) => {
-  
+
+  let isLogged = false;
+
+  if (req.session.user !== undefined) {
+     isLogged = true;
+  }
+ 
   const {email} = req.body;  // recuperamos el email 
   
   const user = await userModel.getDataByEmail(email); // buscamos si ya esta registrado
@@ -64,7 +94,8 @@ const registerUser = async (req, res) => {
   if(user.email !== undefined) {      // si lo encuentra muestra el error
     return res.render('register', { 
       title: 'Register - FunkoShop', 
-      message: 'Error: Usuario ya registrado.' 
+      message: 'Error: Usuario ya registrado.',
+      isLogged:isLogged 
     });
   }   
   
@@ -73,7 +104,8 @@ const registerUser = async (req, res) => {
                                                   // nuevo usuario
   res.render('login', { 
     title: 'Login - FunkoShop', 
-    message: " " 
+    message: " " ,
+    isLogged:isLogged
   });
 }
 
@@ -81,14 +113,9 @@ const registerUser = async (req, res) => {
 const logout = async (req, res) => {
   console.log("sesión cerrada.   " , req.session)
   req.session.destroy();
+
+  return res.redirect('/');
   
-  const relacionados = await modelo.getAllData(); // busca articulos. hay que cambiar la base de datos para
-                                                   // buscar los nuevos
-  res.render('index', {
-    title: 'Home - FunkoShop',
-    relacionados: relacionados,
-    tituloSlider: 'ULTIMOS LANZAMIENTOS'
-  });
 };
 
 module.exports = {

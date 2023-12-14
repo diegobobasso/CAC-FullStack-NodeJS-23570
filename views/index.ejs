@@ -7,58 +7,24 @@
             <%-include('./partials/banner')%>
 
                 <main class='main-index'>
+                    <% novedades.forEach(novedad => { %>
                     <article class='articulo-index'>
-                        <h1 class='text-saga-grande'>STAR WARS & <br>
-                            THE MANDALORIAN</h1>
-                        <p class='text-descripcion-articulo'>Disfruta de una saga que sigue<br>
-                            agregando personajes a su colección.</p>
+                        <h1 class='text-saga-grande'><%=novedad.licence_name%></h1>
+                        <p class='text-descripcion-articulo'><%=novedad.licence_description%></p>
                         <hr> 
                         <form action='shop' method='post'>
-                            <input type='text' name='clave' value='Star Wars' hidden />
+                            <input type='text' name='clave' value=<%=novedad.licence_name%> hidden />
                             <button type='submit' class='btn-gris'>VER COLECCIÓN</button>
                         </form>
                     </article>
 
                     <article class='articulo-index'>
-                        <img onmouseout="this.src='/multimedia/star-wars/baby-yoda-1.webp'"
-                            onmouseover="this.src='/multimedia/star-wars/baby-yoda-box.webp'"
-                            src='/multimedia/star-wars/baby-yoda-1.webp' />
+                        <img onmouseout="this.src='/<%=novedad.img_front%>'"
+                            onmouseover="this.src='/<%=novedad.img_back%>'"
+                            src='/<%=novedad.img_front%>' />
                     </article>
-
-                    <article class='articulo-index'>
-                        <img onmouseout="this.src='multimedia/pokemon/vulpix-1.webp'"
-                            onmouseover="this.src='multimedia/pokemon/vulpix-box.webp'"
-                            src='multimedia/pokemon/vulpix-1.webp' />
-                    </article>
-
-                    <article class='articulo-index'>
-                        <h1 class='text-saga-grande'>POKEMON INDIGO</h1>
-                        <p class='text-descripcion-articulo'>Atrapa todos los que puedas y disfruta <br>de una colección
-                            llena de amigos.</p>
-                        <hr>
-                        <form action='shop' method='post'>
-                            <input type='text' name='clave' value='Pokemon' hidden />
-                            <button type='submit' class='btn-gris'>VER COLECCIÓN</button>
-                        </form>
-                    </article>
-
-                    <article class='articulo-index'>
-                        <h1 class='text-saga-grande'>HARRY POTTER</h1>
-                        <p class='text-descripcion-articulo'>Revive los recuerdos de una saga <br> llena de magia y
-                            encanto.</p>
-                        <hr>
-                        <form action='shop' method='post'>
-                            <input type='text' name='clave' value='Harry Potter' hidden />
-                            <button type='submit' class='btn-gris'>VER COLECCIÓN</button>
-                        </form>
-                    </article>
-
-                    <article class='articulo-index'>
-                        <img onmouseout="this.src='multimedia/harry-potter/snape-patronus-1.webp'"
-                            onmouseover="this.src='multimedia/harry-potter/snape-patronus-box.webp'"
-                            src='multimedia/harry-potter/snape-patronus-1.webp' />
-                    </article>
-
+                    <% }) %>
+                   
                 </main>
 
                 <%-include('./partials/productslider') %>

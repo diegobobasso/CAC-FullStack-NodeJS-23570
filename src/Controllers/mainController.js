@@ -1,13 +1,24 @@
-const modelo = require('../utiles/itemServices'); // Importamos el controlador del modelo
+const modeloItem = require('../utiles/itemServices'); // Importamos el controlador del modelo
+const modeloIndex = require('../utiles/indexServices'); // Importamos el controlador del modelo
+
 // controlador de vista raíz, index
 const mainController = async (req, res) => {
 
-   const relacionados = await modelo.getAllData(); // busca articulos. hay que cambiar la base de datos para
-                                                   // buscar los nuevos
+   let isLogged = false;
+
+   if (req.session.user !== undefined) {
+      isLogged = true;
+   } 
+
+   const relacionados = await modeloItem.getAllData(); // busca articulos.
+   const novedades = await modeloIndex.getAllData(); // busca articulos.
+   
    res.render('index', {
       title: 'Home - FunkoShop', 
       relacionados:relacionados, 
-      tituloSlider:'ULTIMOS LANZAMIENTOS'
+      novedades:novedades,
+      tituloSlider:'ULTIMOS LANZAMIENTOS',
+      isLogged:isLogged
    });
 }
 

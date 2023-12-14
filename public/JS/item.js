@@ -19,7 +19,7 @@ function agregarItem() {
   const id = document.querySelector('#id');
 
   let datos = {   // datos para enviar 
-    product_id: id.value,
+    id: id.value,
     cantidad: Number(cantidad.value)
   };
 

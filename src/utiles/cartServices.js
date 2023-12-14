@@ -46,7 +46,7 @@ module.exports = { // exportamos las funciones
         cart = index;            // lo guardamos en el objeto creado antes
       }
     });
-    console.log( "carrito    " + cart);    // linea para depuración
+    console.log( 'carrito:    ' + cart.email);    // linea para depuración
     return cart;         // devolvemos el carrito si se encontró, sino lo devuelve vacío
   
   },
@@ -81,7 +81,7 @@ module.exports = { // exportamos las funciones
             index.productos[i].cantidad = Number(index.productos[i].cantidad) + Number(producto.cantidad)     // actualiza la cantidad
             result = 1;
           }
-        };
+        }; 
         if(result == 0) {
           index.productos.push(producto); // si no lo encontró antes, lo agrega
           result = 1; 

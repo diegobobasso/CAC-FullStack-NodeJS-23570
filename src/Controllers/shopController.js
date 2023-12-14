@@ -7,7 +7,8 @@ const shopView = async (req, res) => {
   // pagina de la tienda con todos los productos
   res.render('shop', { 
     title: 'Shop - FunkoShop', 
-    articulos: articulos 
+    articulos: articulos, 
+    isLogged:true
   });
 };
 
@@ -124,7 +125,8 @@ const shopFind = async (req, res) => {
   // carga la vista con la información filtrada
   res.render('shop', { 
     title: 'Shop - FunkoShop', 
-    articulos: articulos 
+    articulos: articulos, 
+    isLogged:true 
   }); 
 };
 
@@ -158,6 +160,7 @@ const itemView = async (req, res) => {
     item: item,
     relacionados: relacionados,
     tituloSlider: tituloSlider,
+    isLogged:true
   });
 };
 
@@ -173,15 +176,16 @@ const cartView = async (req, res) => {
   res.render('cart', { 
     title: 'Carrito - FunkoShop',
     productos:productos,
+    isLogged:true
     });
 };
 
   // controlador agrega productos al carrito
 const cartItemAdd = async (req, res) => {
   
-  const { id } = req.params;        // id del producto
+  const id = req.body.id;        // id del producto
   const email = req.session.user;   // mail del usuario
-  const { cantidad } = req.body;    // cantidad del producto a agregar
+  const cantidad = req.body.cantidad;    // cantidad del producto a agregar
 
 
   console.log("id:   " + id);               // líneas de depuración 
@@ -251,7 +255,8 @@ const cartItemDel = async (req, res) => {
   // renderizamos la vista del carrito
   res.render('cart', { 
     title: 'Carrito - FunkoShop',
-    productos:productos
+    productos:productos,
+    isLogged:true
   });
 
 }
