@@ -48,7 +48,10 @@ const loginUser = async (req, res) => {
       console.log('Usuario validado correctamente!');  
       req.session.user = email;          // guardamos el usuario
       console.log(req.session);         // linea de depuración
-      return res.redirect('/');         
+      if(user.role === 'Admin') {
+        return res.redirect('/admin');
+      }
+      return res.redirect('/shop');         
     }
     
   }
