@@ -14,5 +14,13 @@
     "email": "bart@gmail.com",
     "password": "$2a$08$A7a3M/gQAizXgHpk/TAH3O2BZcg7l1NOfTa6UfWDDHYra6DSE0zjy",
     "role": "user"
+  },
+  {
+    "id": 3,
+    "name": "Diego",
+    "lastname": "bobasso",
+    "email": "diego@gmail.com",
+    "password": "$2a$08$qMVxmfLvAGgPSKbvWNF//uASkTUxc.3HCgZcoc1xmf06RPOssJOBu",
+    "role": "user"
   }
 ]

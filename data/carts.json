@@ -2,7 +2,38 @@
   {
     "cart_id": 1,
     "email": "homero@gmail.com",
-    "productos": []
+    "productos": [
+      {
+        "item": {
+          "product_id": 1,
+          "licence_name": "Star Wars",
+          "category_name": "Figuras coleccionables",
+          "product_name": "Baby Yoda Grogu blueball",
+          "product_description": "Figura Funko coleccionable de Baby Yoda Grogu de la saga Star Wars Blueball",
+          "product_price": "1899.25",
+          "dues": "0",
+          "product_sku": "STW001001",
+          "img_front": "multimedia/upload_img/1702163935821_baby-yoda-1.webp",
+          "img_back": "multimedia/upload_img/1702163935824_baby-yoda-box.webp"
+        },
+        "cantidad": "4"
+      },
+      {
+        "item": {
+          "product_id": 11,
+          "licence_name": "Harry Potter",
+          "category_name": "Figuras coleccionables",
+          "product_name": "Hermione Granger Dress",
+          "product_description": "Figura Funko coleccionable de Hermione Granger de la saga Harry Potter con Dress",
+          "product_price": "1799.99",
+          "dues": "6",
+          "product_sku": "HPT001002",
+          "img_front": "multimedia/upload_img/1702164891406_hermione-1.webp",
+          "img_back": "multimedia/upload_img/1702164891408_hermione-box.webp"
+        },
+        "cantidad": 3
+      }
+    ]
   },
   {
     "cart_id": 2,
@@ -39,5 +70,10 @@
         "cantidad": 2
       }
     ]
+  },
+  {
+    "cart_id": 3,
+    "email": "diego@gmail.com",
+    "productos": []
   }
 ]

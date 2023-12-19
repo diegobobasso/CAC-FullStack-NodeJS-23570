@@ -22,9 +22,6 @@ const mainController = async (req, res) => {
    });
 }
 
-const contactController = (req, res) => {
-   res.send("Estas en la página de contacto");
-}
 const aboutController = (req, res) => {
    res.send("Estas en la página de acerca de");
 }
@@ -34,8 +31,7 @@ const faqsController = (req, res) => {
 
 
 module.exports = {
-   mainController, 
-   contactController, 
+   mainController,  
    aboutController, 
    faqsController
 };

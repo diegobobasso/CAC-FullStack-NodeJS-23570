@@ -1,0 +1,29 @@
+    <%-include('./partials/head')%>
+
+    <body>
+
+        <%-include('./partials/header') %>
+        
+        <div class='contenedor pad-y-2'>
+            <h1 class='text-grande'>CONTACTO</h1>
+            <p>Dejanos tu consulta y nos contactaremos a la brevedad.</p>
+
+            <form action='/enviarcorreo' method='post'>
+                <div>
+                    <label for='nombre'>Nombre y apellido:</label>
+                    <input type='text' name='nombre' required>
+
+                    <label for='correo'>Correo:</label>
+                    <input type='email' name='correo' required>
+                </div>
+                <label for="mensaje">Consulta:</label>
+                <textarea name='mensaje' cols='70' rows='5' required></textarea><br>
+
+                <button type='submit'>Enviar</button>
+            </form>    
+        </div>
+        <%-include('./partials/footer') %>
+
+    </body>
+
+</html>
