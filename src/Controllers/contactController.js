@@ -6,7 +6,7 @@ const transporter = nodemailer.createTransport({
     service: 'gmail', // servicio de mail
     auth: {
       user: 'maildelaaplicacion@gmail.com',    // cuenta desde la cual se van a enviar los emails.
-      pass: 'ontraseña de aplicación' // contraseña: en el caso de gmail, hay que habilitar verificación en 2 pasos
+      pass: 'contraseña de aplicación' // contraseña: en el caso de gmail, hay que habilitar verificación en 2 pasos
     }                              // y crear un conseña para nuestra aplicación. 
   });
 
